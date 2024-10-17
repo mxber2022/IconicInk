@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import "./Connect.css"
 
 const socket = io('http://localhost:4000');  // Connect to Express.js server
 
@@ -42,8 +43,8 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   };
 
   return (
-    <div>
-      <h1>Document Editor</h1>
+    <div className="container">
+      <h1>Collab Prompt</h1>
       <textarea
         value={content}
         onChange={handleEdit}

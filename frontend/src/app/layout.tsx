@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { headers } from "next/headers"; // added
+import { headers } from "next/headers";
 import { Inter } from "next/font/google";
-import ContextProvider from './context'
+import ContextProvider from './context';
+import Nav from "./components/Nav/Nav"; // Import the Footer component
+import Footer from "./components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +30,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookies = headers().get('cookie')
+  const cookies = headers().get('cookie');
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ContextProvider cookies={cookies}>{children}</ContextProvider>
+        <ContextProvider cookies={cookies}>
+          {/* Global Navigation Component */}
+          <Nav />
+          
+          {/* Main Content */}
+          <main className="pt-[100px]">{children}</main>
+
+          {/* Global Footer Component */}
+          <Footer />
+        </ContextProvider>
       </body>
     </html>
-  )
+  );
 }
