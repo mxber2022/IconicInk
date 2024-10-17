@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';  // Assuming you're using wagmi for wallet connect
 import io from 'socket.io-client';
 import "./Connect.css";
+import TextToImagePage from '../Text2Image/Text2Image';
 
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
@@ -81,6 +82,10 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     setIsRequestPending(false);
   };
 
+  async function generateAI() {
+    
+  }
+
   return (
     <div className="container">
       <h1>Collab Prompt</h1>
@@ -100,6 +105,9 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             cols={50}
             disabled={!isApproved}
           />
+
+          <TextToImagePage prompt={content} />
+          
           {!isApproved && <p>Your wallet address is not approved for editing.</p>}
         </div>
       ) : (
