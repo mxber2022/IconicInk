@@ -17,7 +17,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false); // Tracks if user is editing
   const [isApproved, setIsApproved] = useState<boolean>(false); // Tracks if user is approved to edit
   const [isRequestPending, setIsRequestPending] = useState<boolean>(false); // Tracks if the approval request is pending
-
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null); 
   // Get the wallet address from the connected wallet using useAccount
   const { address, isConnected } = useAccount();
 
@@ -42,10 +42,15 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       setIsApproved(status === 'approved');
     });
 
+    socket.on('ai-image-generated', (imageUrl) => {
+      setGeneratedImage(imageUrl); // Set the generated image URL
+    });
+
     return () => {
       // Clean up listeners when component is unmounted
       socket.off('document-update');
       socket.off('wallet-status');
+      socket.off('ai-image-generated');
     };
   }, [docId, address, isConnected]); // Re-run effect when docId, address, or isConnected changes
 
@@ -66,7 +71,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   // Handle wallet approval request
   const requestApproval = async () => {
     setIsRequestPending(true);
-    const res = await fetch('/api/request-approval', {
+    const res = await fetch('http://localhost:4000/api/request-approval', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,9 +87,6 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     setIsRequestPending(false);
   };
 
-  async function generateAI() {
-    
-  }
 
   return (
     <div className="container">
@@ -106,7 +108,16 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             disabled={!isApproved}
           />
 
-          <TextToImagePage prompt={content} />
+          {/* <TextToImagePage prompt={content} /> */}
+          <TextToImagePage prompt={content} roomId={docId} />
+
+           {/* Display the generated image */}
+           {generatedImage && (
+            <div>
+              <h3>Generated AI Image:</h3>
+              <img src={generatedImage} alt="Generated AI" />
+            </div>
+          )}
           
           {!isApproved && <p>Your wallet address is not approved for editing.</p>}
         </div>

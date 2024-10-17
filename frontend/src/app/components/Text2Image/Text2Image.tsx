@@ -5,6 +5,9 @@ import * as Form from "@radix-ui/react-form";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { textToImage } from "@/app/action";
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:4000');
 
 const modelIds = [
   "ByteDance/SDXL-Lightning",
@@ -20,9 +23,10 @@ const widths = ["256", "512", "768", "1024"];
 
 interface TextToImagePageProps {
     prompt: string;
+    roomId: string; 
 }
 
-export default function TextToImagePage({ prompt }: TextToImagePageProps) { 
+export default function TextToImagePage({ prompt, roomId }: TextToImagePageProps) { 
 
   console.log("prompt:", prompt);
   const [images, setImages] = useState<string[]>([]);
@@ -51,7 +55,14 @@ export default function TextToImagePage({ prompt }: TextToImagePageProps) {
       const result = await textToImage(formData);
       if (result.success) {
         setImages((prevImages) => [...result.images, ...prevImages]);
+
+        result.images.forEach((imageUrl: string) => {
+            socket.emit('ai-image-generated', { roomId, imageUrl });
+          });
       }
+
+      
+
     });
   }
 

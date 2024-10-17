@@ -98,6 +98,14 @@ io.on('connection', (socket) => {
     socket.emit('wallet-status', isApproved ? 'approved' : 'not approved');
   });
 
+  socket.on('ai-image-generated', (data) => {
+    console.log("data: ", data);
+    const { roomId, imageUrl } = data;
+
+    // Broadcast the generated image URL to all users in the room
+    io.to(roomId).emit('ai-image-generated', imageUrl);
+  });
+
   socket.on('edit-document', (data) => {
     const { roomId, content, walletAddress } = data;
 
