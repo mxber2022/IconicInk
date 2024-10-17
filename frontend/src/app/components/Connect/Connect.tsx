@@ -1,5 +1,5 @@
 'use client'; // Required for Next.js client-side rendering
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAccount } from 'wagmi';  // Assuming you're using wagmi for wallet connect
 import io from 'socket.io-client';
 import "./Connect.css";
@@ -18,7 +18,10 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   const [isApproved, setIsApproved] = useState<boolean>(false); // Tracks if user is approved to edit
   const [isRequestPending, setIsRequestPending] = useState<boolean>(false); // Tracks if the approval request is pending
   const [generatedImage, setGeneratedImage] = useState<string | null>(null); 
-  // Get the wallet address from the connected wallet using useAccount
+  const canvasRef = useRef<HTMLCanvasElement | null>(null); // Reference for the canvas where user draws the signature
+  const signatureCanvasRef = useRef<HTMLCanvasElement | null>(null); // For the signature canvas
+  const [drawing, setDrawing] = useState(false); // Tracks whether the user is currently drawing
+
   const { address, isConnected } = useAccount();
 
   useEffect(() => {
@@ -87,6 +90,62 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     setIsRequestPending(false);
   };
 
+  // Function to start drawing the signature on the signature canvas
+  const startDrawing = (event: React.MouseEvent) => {
+    const canvas = signatureCanvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    context.beginPath();
+    context.moveTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    setDrawing(true);
+  };
+
+  // Function to continue drawing the signature
+  const drawSignature = (event: React.MouseEvent) => {
+    if (!drawing) return;
+
+    const canvas = signatureCanvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    context.lineTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    context.strokeStyle = 'black';
+    context.lineWidth = 2;
+    context.stroke();
+  };
+
+  // Function to stop drawing the signature
+  const stopDrawing = () => {
+    setDrawing(false);
+  };
+
+  // Function to add the custom signature to the generated image using Canvas
+  const addSignatureToImage = () => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext('2d');
+    const image = new Image();
+    image.src = generatedImage!;
+
+    image.onload = function () {
+      if (canvas && context) {
+        // Set canvas dimensions to match the image
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        // Draw the image on the canvas
+        context.drawImage(image, 0, 0);
+
+        // Overlay the signature from the signature canvas
+        const signatureCanvas = signatureCanvasRef.current;
+        if (signatureCanvas) {
+          context.drawImage(signatureCanvas, 0, 0); // Draw the signature on top of the image
+        }
+      }
+    };
+  };
 
   return (
     <div className="container">
@@ -108,14 +167,32 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             disabled={!isApproved}
           />
 
-          {/* <TextToImagePage prompt={content} /> */}
           <TextToImagePage prompt={content} roomId={docId} />
 
-           {/* Display the generated image */}
-           {generatedImage && (
+          {/* Display the generated image */}
+          {generatedImage && (
             <div>
               <h3>Generated AI Image:</h3>
               <img src={generatedImage} alt="Generated AI" />
+
+              <h3>Generated AI Image with Signature:</h3>
+              {/* Main canvas for displaying the image */}
+              <canvas id="imageCanvas" ref={canvasRef} />
+
+              <h4>Draw your signature:</h4>
+              {/* Canvas for drawing the signature */}
+              <canvas
+                id="signatureCanvas"
+                ref={signatureCanvasRef}
+                width={500} 
+                height={200}
+                style={{ border: '1px solid black' }}
+                onMouseDown={startDrawing}
+                onMouseMove={drawSignature}
+                onMouseUp={stopDrawing}
+              />
+
+              <button onClick={addSignatureToImage}>Add Signature to Image</button>
             </div>
           )}
           
