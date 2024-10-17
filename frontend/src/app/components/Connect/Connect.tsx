@@ -88,9 +88,11 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
         <div>
-          <button onClick={requestApproval} disabled={isRequestPending || !address}>
-            Request Approval
-          </button>
+          {!isApproved && (
+        <button onClick={requestApproval} disabled={isRequestPending || !address}>
+          Request Approval
+        </button>
+      )}
           <textarea
             value={content}
             onChange={handleEdit}
