@@ -322,7 +322,7 @@ export default function TextToImagePage({ prompt, roomId }: TextToImagePageProps
           </Form.Submit>
         </Form.Root>
 
-        {images.length > 0 && (
+        {/* {images.length > 0 && (
           <div className="mt-8">
             <h2 className="mb-4 text-xl font-semibold">Generated Images</h2>
             <div className="grid grid-cols-2 gap-4">
@@ -336,7 +336,7 @@ export default function TextToImagePage({ prompt, roomId }: TextToImagePageProps
               ))}
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

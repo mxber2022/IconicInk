@@ -8,6 +8,7 @@ import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
+const owner = "0x7199D548f1B30EA083Fe668202fd5E621241CC89";
 
 interface DocumentEditorProps {
   docId: string;
@@ -217,7 +218,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       const url = URL.createObjectURL(blob);
       const newImg = document.createElement('img');
       newImg.src = url;
-      document.body.appendChild(newImg);
+     // document.body.appendChild(newImg);
   
       newImg.onload = () => {
         URL.revokeObjectURL(url); // Free memory
@@ -271,25 +272,33 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
               <h3>Generated AI Image:</h3>
               <img src={generatedImage} alt="Generated AI" />
 
-              <h3>Generated AI Image with Signature:</h3>
-              {/* Main canvas for displaying the image */}
-              <canvas id="imageCanvas" ref={canvasRef} />
+              
 
-              <h4>Draw your signature:</h4>
-              {/* Canvas for drawing the signature */}
-              <canvas
-                id="signatureCanvas"
-                ref={signatureCanvasRef}
-                width={500} 
-                height={200}
-                style={{ border: '1px solid black' }}
-                onMouseDown={startDrawing}
-                onMouseMove={drawSignature}
-                onMouseUp={stopDrawing}
-              />
-
-              <button onClick={addSignatureToImage}>Add Signature to Image</button>
-              <button onClick={mint}>Mint</button>
+              
+              {
+                address == owner && (
+                  <>
+                  <h3>Generated AI Image with Signature:</h3>
+                {/* Main canvas for displaying the image */}
+                <canvas id="imageCanvas" ref={canvasRef} />
+                    <h4>Draw your signature:</h4>
+                    {/* Canvas for drawing the signature */}
+                    <canvas
+                      id="signatureCanvas"
+                      ref={signatureCanvasRef}
+                      width={500} 
+                      height={200}
+                      style={{ border: '1px solid black' }}
+                      onMouseDown={startDrawing}
+                      onMouseMove={drawSignature}
+                      onMouseUp={stopDrawing}
+                    />
+                    <button onClick={addSignatureToImage}>Add Signature to Image</button>
+                    <button onClick={mint}>Mint</button>
+                  </>
+                )
+              }
+              
             </div>
           )}
           
