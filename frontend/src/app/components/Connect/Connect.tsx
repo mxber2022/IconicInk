@@ -5,11 +5,6 @@ import io from 'socket.io-client';
 import "./Connect.css";
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
-import { MemoryBlockstore } from 'blockstore-core';
-import { MemoryDatastore } from 'datastore-core';
-import { createHelia } from 'helia';
-import { unixfs } from '@helia/unixfs';
-import { CID } from 'multiformats/cid';
 import { useWriteContract } from 'wagmi'
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
@@ -155,134 +150,6 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   };
 
   const { writeContract, isSuccess, data: writeContractData, status: writeContractStatus, error } = useWriteContract();
-
-  // const mint = async () => {
-  //   const canvas = document.getElementById('imageCanvas') as HTMLCanvasElement;
-  
-  //   if (!canvas) {
-  //     console.error("Canvas not found!");
-  //     return;
-  //   }
-  
-  //   const context = canvas.getContext('2d');
-  
-  //   if (!context) {
-  //     console.error("Canvas context not found.");
-  //     return;
-  //   }
-  
-  //   // Convert the canvas to a blob
-  //   canvas.toBlob(async (blob) => {
-  //     if (!blob) {
-  //       console.error("Failed to convert canvas to blob.");
-  //       return;
-  //     }
-  
-  //     // Log the blob for debugging purposes
-  //     console.log("Generated blob: ", blob);
-  
-  //     // Create a new image from the blob (optional: to display it)
-  //     const newImg = document.createElement("img");
-  //     const url = URL.createObjectURL(blob);
-  //     console.log("Generated blob URL: ", url);
-  
-  //     newImg.onload = () => {
-  //       // Revoke the object URL after the image is loaded (optional for memory)
-  //       URL.revokeObjectURL(url);
-  //     };
-  
-  //     // Set the image source and append it to the body (for display)
-  //     newImg.src = url;
-  //     document.body.appendChild(newImg);
-  
-  //     // IPFS upload logic (optional):
-  //     try {
-  //       // const blockstore = new MemoryBlockstore();
-  //       // const datastore = new MemoryDatastore();
-  
-  //       // // Create a Helia instance
-  //       // const helia = await createHelia({
-  //       //   blockstore,
-  //       //   datastore,
-  //       // });
-  
-  //       // // Create a UnixFS instance
-  //       // const fs = unixfs(helia);
-  
-  //       // // Convert the Blob to ArrayBuffer
-  //       // const buffer = await blob.arrayBuffer();
-  //       // const uint8Array = new Uint8Array(buffer);
-  //       // //const uint8Array = Buffer.from(buffer);
-  //       // // Wrap the Uint8Array in a FileCandidate object
-  //       // const fileCandidate = {
-  //       //   content: uint8Array,  // The content property is required
-  //       // };
-  
-  //       // console.log("FileCandidate: ", fileCandidate);
-  
-  //       // // Upload the file to UnixFS (IPFS)
-  //       // const cid = await fs.addFile(fileCandidate);
-  //       // const ipfsUrl = `https://ipfs.io/ipfs/${cid.toString()}`;
-  //       // console.log("Uploaded Image URL: ", ipfsUrl);
-  //       // alert(`Image uploaded! View it at: ${ipfsUrl}`);
-
-  //       const base64Blob = await convertBlobToBase64(blob);
-
-  //       try {
-  //           const response = await fetch('/api/uploadToIPFS', {
-  //               method: 'POST',
-  //               headers: {
-  //                   'Content-Type': 'application/json',
-  //               },
-  //               body: JSON.stringify({ blob: base64Blob }), // Send base64-encoded blob
-  //           });
-    
-  //           const data = await response.json();
-  //           if (response.ok) {
-  //               console.log('IPFS Upload Result:', data);
-  //           } else {
-  //               console.error('Error:', data.message);
-  //           }
-  //       } catch (error) {
-  //           console.error('Error uploading file:', error);
-  //       }
-
-  //       // writeContract({ 
-  //       //   abi,
-  //       //   address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
-  //       //   functionName: 'safeMint',  // createMarket
-  //       //   args: [ 
-  //       //     "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
-  //       //     response
-  //       //   ]
-  //       // })
-
-
-  //     } catch (error) {
-  //       console.error('Error uploading to IPFS with Helia:', error);
-  //     }
-      
-  //     /* 
-  //       Mint Logic
-  //     */
-
-  
-
-  //     // Download logic
-  //     // const link = document.createElement('a');
-  //     // link.href = url;
-  //     // link.download = 'canvas_image.png';  // Set the file name for download
-  //     // document.body.appendChild(link);
-  //     // link.click();  // Programmatically trigger the download
-  
-  //     // Clean up: Revoke the object URL after the download is triggered
-  //     // setTimeout(() => {
-  //     //   document.body.removeChild(link);
-  //     //   URL.revokeObjectURL(url);  // This ensures memory is freed after download
-  //     // }, 0);
-  //   }, 'image/png'); // You can adjust the image type as needed (e.g., 'image/jpeg', 'image/webp')
-  // };
-
   
   const convertBlobToBase64 = (blob: Blob): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -355,17 +222,20 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       newImg.onload = () => {
         URL.revokeObjectURL(url); // Free memory
       };
-  
-      // Example of minting logic if needed after IPFS
-      // writeContract({ 
-      //   abi,
-      //   address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
-      //   functionName: 'safeMint',  // createMarket
-      //   args: [ 
-      //     "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
-      //     response
-      //   ]
-      // });
+      
+      console.log("data",data.IpfsHash)
+      /*
+        Mint nft
+      */
+      writeContract({ 
+        abi,
+        address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
+        functionName: 'safeMint',  // createMarket
+        args: [ 
+          "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
+          data.IpfsHash
+        ]
+      });
   
     } catch (error) {
       console.error("Error during the minting process:", error);
