@@ -79,27 +79,8 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
-      <h2 className="chat-title">Community Chat</h2>
-      <div className="join-room-container">
-        {/* <input
-          type="text"
-          className="input-field"
-          placeholder="Enter Room ID"
-          value={roomId.current}
-          onChange={(e) => setRoomId(e.target.value)}
-        /> */}
-        {/* <input
-          type="text"
-          className="input-field"
-          placeholder="Enter Wallet Address"
-          value={walletAddress}
-          onChange={(e) => setWalletAddress(e.target.value)}
-        /> */}
-        {/* <button className="join-button" onClick={joinRoom}>
-          Join Room
-        </button> */}
-      </div>
-
+      <h2 className="chat-title rajdhani-medium">Community Chat</h2>
+      
       <div className="chat-box">
         {messages.map((msg, index) => (
             <div key={index} className="chat-message">
@@ -112,17 +93,22 @@ const Chat = () => {
         ))}
         </div>
 
-      <div className="message-input-container">
-        <input
-          type="text"
-          className="input-field font-rajdhani font-medium"
-          placeholder="Type your message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button className="send-button font-rajdhani font-medium" onClick={sendMessage}>
-          Send
-        </button>
+      <div className="message-input-container flex justify-center">
+        <div>
+            <input
+            type="text"
+            className="input-field font-rajdhani font-medium"
+            placeholder="Type your message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            />
+        </div>
+
+        <div className="btnsend">
+            <button className="send-button font-rajdhani font-medium" onClick={sendMessage}>
+            Send
+            </button>
+        </div>
       </div>
     </div>
   );

@@ -246,13 +246,13 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   
   return (
     <div className="container">
-      <h1>PromptFusion</h1>
+      <h1 className='rajdhani-medium '>PromptFusion</h1>
       
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
         <div>
           {!isApproved && (
-        <button onClick={requestApproval} disabled={isRequestPending || !address}>
+        <button onClick={requestApproval} disabled={isRequestPending || !address} className='send-button font-rajdhani '>
           Request Approval
         </button>
       )}
@@ -262,6 +262,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             rows={10}
             cols={50}
             disabled={!isApproved}
+            className='font-rajdhani '
           />
 
           <TextToImagePage prompt={content} roomId={docId} />
@@ -302,10 +303,10 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             </div>
           )}
           
-          {!isApproved && <p>Your wallet address is not approved for editing.</p>}
+          {!isApproved && <p className="font-rajdhani">Your wallet address is not approved for editing.</p>}
         </div>
       ) : (
-        <p>Please connect your wallet to proceed.</p>
+        <p className="font-rajdhani">Please connect your wallet to proceed.</p>
       )}
     </div>
   );

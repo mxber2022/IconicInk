@@ -9,7 +9,7 @@ function Nav() {
                 <div className="nav__left">
                     <div>
                         <Link href="/" style={{ color: 'black', textDecoration: 'none' } }>
-                            <div className="nav__logo">
+                            <div className="nav__logo ">
                                 IconicInk
                                 
                             </div>

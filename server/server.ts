@@ -99,7 +99,7 @@ io.on('connection', (socket) => {
     console.log(`User with wallet ${walletAddress} joined room ${roomId}`);
 
     // Send the current document content to the newly connected user
-    const currentContent = documents[roomId] || "Collaborative document content";
+    const currentContent = documents[roomId] || "Enter Your Prompt :)";
     socket.emit('document-update', currentContent);
 
     // Check if the wallet address is approved

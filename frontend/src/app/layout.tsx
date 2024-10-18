@@ -43,7 +43,7 @@ export default function RootLayout({
           {/* Main Content */}
           <main className="pt-[100px]">{children}</main>
 
-          <Chat/>
+          
           {/* Global Footer Component */}
           <Footer />
         </ContextProvider>

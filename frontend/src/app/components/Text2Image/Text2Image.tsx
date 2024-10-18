@@ -67,8 +67,8 @@ export default function TextToImagePage({ prompt, roomId }: TextToImagePageProps
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-2xl rounded-lg bg-white p-8 shadow-lg">
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-2 font-rajdhani">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-16 shadow-lg">
         {/* <h1 className="mb-6 text-center text-2xl font-bold">
           Text-to-Image Generator
         </h1> */}
@@ -314,14 +314,14 @@ export default function TextToImagePage({ prompt, roomId }: TextToImagePageProps
 
           <Form.Submit asChild>
             <button
-              className="flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="send-button flex w-full justify-center"
               disabled={isPending}
             >
               {isPending ? "Generating..." : "Generate Images"}
             </button>
           </Form.Submit>
         </Form.Root>
-
+         
         {/* {images.length > 0 && (
           <div className="mt-8">
             <h2 className="mb-4 text-xl font-semibold">Generated Images</h2>
