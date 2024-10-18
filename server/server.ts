@@ -139,11 +139,11 @@ io.on('connection', (socket) => {
   */
 
     socket.on('sentmessage', (data) => {
-      const { roomId, message, walletAddress } = data;
+      const { roomId, message, address } = data;
       console.log("message arrived: ", message);
       // Broadcast the message to everyone in the room
       io.to(roomId).emit('chat-message', {
-        walletAddress,
+        address,
         message,
         timestamp: new Date().toISOString(),
       });
