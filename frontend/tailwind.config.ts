@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        rajdhani: ["Rajdhani", "sans-serif"], // Create a custom font family
+      },
     },
   },
   plugins: [],

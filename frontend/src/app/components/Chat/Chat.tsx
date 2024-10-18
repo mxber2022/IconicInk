@@ -101,26 +101,26 @@ const Chat = () => {
       </div>
 
       <div className="chat-box">
-  {messages.map((msg, index) => (
-    <div key={index} className="chat-message">
-      <strong>
-        {msg.address.slice(0, 4)}....{msg.address.slice(-4)}
-      </strong>
-      : {msg.message}{" "}
-      <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
-    </div>
-  ))}
-</div>
+        {messages.map((msg, index) => (
+            <div key={index} className="chat-message">
+            <strong className="font-rajdhani">
+                {msg.address.slice(0, 4)}....{msg.address.slice(-4)}
+            </strong>
+            : {msg.message}{" "}
+            <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
+            </div>
+        ))}
+        </div>
 
       <div className="message-input-container">
         <input
           type="text"
-          className="input-field"
+          className="input-field font-rajdhani font-medium"
           placeholder="Type your message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button className="send-button" onClick={sendMessage}>
+        <button className="send-button font-rajdhani font-medium" onClick={sendMessage}>
           Send
         </button>
       </div>
