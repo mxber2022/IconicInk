@@ -34,13 +34,13 @@ function Nav() {
                         
                         </Link>
                     </div>
-
+*/}
                     <div >
                         <Link href="/Presentation" style={{ color: 'black', textDecoration: 'none' }}>
-                        <p className="tagline" > Every Hacker Goes Home Winning 🖤 </p>
+                        <p className="tagline" > Where Icons and Fans Create Sign Mint </p>
 
                         </Link>
-                    </div> */}
+                    </div> 
 
                 </div>
                 <div className="nav__right">
