@@ -133,6 +133,22 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('A user disconnected');
   });
+
+  /*
+    for chat 
+  */
+
+    socket.on('sentmessage', (data) => {
+      const { roomId, message, walletAddress } = data;
+      console.log("message arrived: ", message);
+      // Broadcast the message to everyone in the room
+      io.to(roomId).emit('chat-message', {
+        walletAddress,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+    });
+    
 });
 
 // Start the server

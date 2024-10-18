@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import ContextProvider from './context';
 import Nav from "./components/Nav/Nav"; // Import the Footer component
 import Footer from "./components/Footer/Footer";
+import Chat from "./components/Chat/Chat";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           {/* Main Content */}
           <main className="pt-[100px]">{children}</main>
 
+          <Chat/>
           {/* Global Footer Component */}
           <Footer />
         </ContextProvider>

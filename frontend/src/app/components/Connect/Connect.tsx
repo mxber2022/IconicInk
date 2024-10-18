@@ -246,7 +246,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   
   return (
     <div className="container">
-      <h1>Collab Prompt</h1>
+      <h1>PromptFusion</h1>
       
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (

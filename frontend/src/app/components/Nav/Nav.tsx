@@ -10,7 +10,7 @@ function Nav() {
                     <div>
                         <Link href="/" style={{ color: 'black', textDecoration: 'none' } }>
                             <div className="nav__logo">
-                                AICollab
+                                IconicInk
                                 
                             </div>
                             
