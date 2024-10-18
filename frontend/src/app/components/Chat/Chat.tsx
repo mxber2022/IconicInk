@@ -101,13 +101,16 @@ const Chat = () => {
       </div>
 
       <div className="chat-box">
-        {messages.map((msg, index) => (
-          <div key={index} className="chat-message">
-            <strong>{msg.address}:</strong> {msg.message}{" "}
-            <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
-          </div>
-        ))}
-      </div>
+  {messages.map((msg, index) => (
+    <div key={index} className="chat-message">
+      <strong>
+        {msg.address.slice(0, 4)}....{msg.address.slice(-4)}
+      </strong>
+      : {msg.message}{" "}
+      <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
+    </div>
+  ))}
+</div>
 
       <div className="message-input-container">
         <input
