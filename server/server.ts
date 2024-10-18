@@ -6,6 +6,15 @@ import cors from 'cors';
 const app = express();
 const server = http.createServer(app);
 app.use(express.json());
+
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow access from any origin
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // CORS middleware for Express
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from Next.js frontend
