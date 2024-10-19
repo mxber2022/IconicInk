@@ -294,8 +294,8 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                       onMouseMove={drawSignature}
                       onMouseUp={stopDrawing}
                     />
-                    <button onClick={addSignatureToImage}>Add Signature to Image</button>
-                    <button onClick={mint}>Mint</button>
+                    <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
+                    <button onClick={mint} className='send-button font-rajdhani'>Mint</button>
                   </>
                 )
               }
@@ -303,7 +303,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             </div>
           )}
           
-          {!isApproved && <p className="font-rajdhani">Your wallet address is not approved for editing.</p>}
+          {!isApproved && <p className="font-rajdhani">Your wallet address is not approved for editing prompt.</p>}
         </div>
       ) : (
         <p className="font-rajdhani">Please connect your wallet to proceed.</p>
