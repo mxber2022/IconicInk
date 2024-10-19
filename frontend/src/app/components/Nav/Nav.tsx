@@ -3,29 +3,32 @@ import "./Nav.css";
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import { useState, useEffect } from "react";
+import { approvedWallets } from "@/app/utils/approvedWallets";
 
 function Nav() {
 
     const { address, isConnected } = useAccount();
 
     const [wallets, setWallets] = useState<string[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch('http://localhost:4000/api/approved-wallets')
-            .then((res) => res.json())
-            .then((data: string[]) => {
-                const adminWallet = process.env.NEXT_PUBLIC_ADMIN; // Get the admin wallet from env variable
-                
-                if (adminWallet) {
-                    const filteredWallets = data.filter(wallet => wallet !== adminWallet); // Filter out admin wallet
-                    setWallets(filteredWallets); // Update state with filtered wallets
-                } else {
-                    setWallets(data); // If no admin wallet is set, use the original data
-                }
-            })
-            .catch((err) => console.error("Error fetching wallets: ", err));
+        const fetchData = async () => {
+            try {
+                const walletsData = await approvedWallets();
+                setWallets(walletsData);
+            } catch (err) {
+                setError('Failed to fetch wallets');
+            }
+        };
+
+        fetchData();
     }, []);
-    
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
     return(
         <nav className="nav">
             <div className="nav__container">

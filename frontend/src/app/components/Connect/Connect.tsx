@@ -252,7 +252,66 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   };
   
   async function mintOnStory() {
-    haha()
+    const canvas = document.getElementById('imageCanvas') as HTMLCanvasElement;
+  
+    if (!canvas) {
+      console.error("Canvas not found!");
+      return;
+    }
+  
+    const context = canvas.getContext('2d');
+    if (!context) {
+      console.error("Canvas context not found.");
+      return;
+    }
+  
+    try {
+      // Convert the canvas to a Blob
+      const blob = await canvasToBlob(canvas, 'image/png');
+  
+      if (!blob) {
+        console.error("Failed to convert canvas to blob.");
+        return;
+      }
+  
+      // Convert Blob to base64
+      const base64Blob = await convertBlobToBase64(blob);
+      
+      console.log("Generated base64 blob: ", base64Blob);
+  
+      // IPFS upload logic
+      const response = await fetch('/api/uploadToIPFS', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ blob: base64Blob }), // Send base64-encoded blob
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        console.log('IPFS Upload Result:', data);
+      } else {
+        console.error('Error:', data.message);
+      }
+  
+      // Optional image display logic
+      const url = URL.createObjectURL(blob);
+      const newImg = document.createElement('img');
+      newImg.src = url;
+     // document.body.appendChild(newImg);
+  
+      newImg.onload = () => {
+        URL.revokeObjectURL(url); // Free memory
+      };
+      
+      console.log("data",data.IpfsHash)
+      
+      haha(data.IpfsHash)
+        
+      } catch (error) {
+        console.error("Error during the minting process:", error);
+      }
   }
   
   return (

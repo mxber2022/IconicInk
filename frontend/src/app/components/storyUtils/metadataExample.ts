@@ -2,13 +2,21 @@ import { http } from 'viem'
 import { privateKeyToAccount, Address, Account } from 'viem/accounts'
 import { createHash } from 'crypto'
 import { CreateIpAssetWithPilTermsResponse, IpMetadata, PIL_TYPE, StoryClient, StoryConfig } from '@story-protocol/core-sdk'
+import { useState, useEffect } from 'react'
+import { approvedWallets } from '@/app/utils/approvedWallets'
 
-async function haha() {
+async function haha(nftImageLink: String, ) {
 
+
+        
+    const walletsData = await approvedWallets();
+
+
+    const ipfsPrefix = "https://ipfs.io/ipfs/";
+    console.log(`${ipfsPrefix}${nftImageLink}`);
     const privateKey: Address = `0x${process.env.NEXT_PUBLIC_PRIVATE_KEY}`
     console.log("privateKey: ",privateKey);
     const account: Account = privateKeyToAccount(privateKey)
-
     
     const config: StoryConfig = {  
         account: account,  
@@ -18,18 +26,18 @@ async function haha() {
     const client = StoryClient.newClient(config)
 
     const ipMetadata = client.ipAsset.generateIpMetadata({
-        title: "",
+        title: "AI GENERATED UNIQUE FAN PROMPT",
         description:"",
         attributes: [{
-            key: 'rare',
-            value: 'AI'
+            key: 'AI',
+            value: 'YES'
         }]
     })
 
     const nftMetadata = {
-        name: 'Test NFT',
-        description: 'This is a test NFT',
-        image: 'https://picsum.photos/200',
+        name: 'AI',
+        description: 'AI GENERATED UNIQUE FAN PROMPT',
+        image: `${ipfsPrefix}${nftImageLink}`,
     }
 
     //const ipIpfsHash = await uploadJSONToIPFS(ipMetadata)
@@ -66,6 +74,7 @@ async function haha() {
     const response: CreateIpAssetWithPilTermsResponse = await client.ipAsset.mintAndRegisterIpAssetWithPilTerms({
         nftContract: "0xA004Ff15DF42D71E9611A4cA1b2E078209897144",
         pilType: PIL_TYPE.NON_COMMERCIAL_REMIX,
+        recipient: walletsData[0] as Address,
         ipMetadata: {
             ipMetadataURI: `https://ipfs.io/ipfs/${ipIpfsHash}`,
             ipMetadataHash: `0x${ipHash}`,
