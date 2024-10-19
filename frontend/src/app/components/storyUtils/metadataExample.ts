@@ -85,6 +85,8 @@ async function haha(nftImageLink: String, ) {
     })
     console.log(`Root IPA created at transaction hash ${response.txHash}, IPA ID: ${response.ipId}`)
     console.log(`View on the explorer: https://explorer.story.foundation/ipa/${response.ipId}`)
+
+    return `https://explorer.story.foundation/ipa/${response.ipId}`
 }
 
 export default haha;

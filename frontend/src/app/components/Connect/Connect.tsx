@@ -25,8 +25,10 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null); // Reference for the canvas where user draws the signature
   const signatureCanvasRef = useRef<HTMLCanvasElement | null>(null); // For the signature canvas
   const [drawing, setDrawing] = useState(false); // Tracks whether the user is currently drawing
-
   const { address, isConnected } = useAccount();
+
+  const [status, setStatus] = useState<string>('MintOnStory');
+  const [uri, setUri] = useState<string>('');
 
   useEffect(() => {
     // Fetch the initial document content when the component loads
@@ -252,6 +254,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   };
   
   async function mintOnStory() {
+    setStatus("on ipfs ...");
     const canvas = document.getElementById('imageCanvas') as HTMLCanvasElement;
   
     if (!canvas) {
@@ -306,8 +309,10 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       };
       
       console.log("data",data.IpfsHash)
-      
-      haha(data.IpfsHash)
+      setStatus("Minting ...");
+      const hashuri = await haha(data.IpfsHash)
+      setUri(hashuri)
+      setStatus("Minted");
         
       } catch (error) {
         console.error("Error during the minting process:", error);
@@ -372,11 +377,13 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                         <button onClick={mint} className='send-button font-rajdhani'>MintOnZora</button>
                       </div>
                       <div className='mr-4'>
-                        <button onClick={mintOnStory} className='send-button font-rajdhani'>MintOnStory</button>
+                        <button onClick={mintOnStory} className='send-button font-rajdhani'>{status}</button>
                       </div>
                     </div>
                     
-                    
+                    {
+                     <p className='rajdhani-semibold'><a href={uri} target="_blank" rel="noopener noreferrer">{uri}</a></p>
+                    }
                     
                   </>
                 )
