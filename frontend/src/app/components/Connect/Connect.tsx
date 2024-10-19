@@ -305,9 +305,20 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                       onMouseMove={drawSignature}
                       onMouseUp={stopDrawing}
                     />
-                    <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
-                    <button onClick={mint} className='send-button font-rajdhani'>MintOnBase</button>
-                    <button onClick={mintOnStory} className='send-button font-rajdhani'>MintOnStory</button>
+                    <div className='flex'>
+                      <div className='mr-4'>
+                        <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
+                      </div>
+                      <div className='mr-4'>
+                        <button onClick={mint} className='send-button font-rajdhani'>MintOnBase</button>
+                      </div>
+                      <div className='mr-4'>
+                        <button onClick={mintOnStory} className='send-button font-rajdhani'>MintOnStory</button>
+                      </div>
+                    </div>
+                    
+                    
+                    
                   </>
                 )
               }
