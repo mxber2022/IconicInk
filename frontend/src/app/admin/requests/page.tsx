@@ -13,7 +13,8 @@ const AdminRequestsPage: React.FC = () => {
   useEffect(() => {
     fetch('http://localhost:4000/api/pending-requests')
       .then((res) => res.json())
-      .then((data) => setRequests(data));
+      .then((data) => setRequests(data))
+      .catch((err) => console.error("Error fetching pending requests:", err));
   }, []);
 
   // Approve a wallet address
@@ -32,7 +33,7 @@ const AdminRequestsPage: React.FC = () => {
 
   // Reject a wallet address
   const rejectWallet = async (walletAddress: string) => {
-    await fetch('/api/reject-wallet', {
+    await fetch('http://localhost:4000/api/reject-wallet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ walletAddress }),
@@ -46,27 +47,31 @@ const AdminRequestsPage: React.FC = () => {
 
   return (
     <div className="wallet-requests font-rajdhani">
-  <h1>Pending Wallet Approval Requests</h1>
-  <ul>
-    {requests.length === 0 ? (
-      <p className="no-requests">No pending requests</p>
-    ) : (
-      requests.map((request) => (
-        <li key={request.walletAddress} className="request-item font-rajdhani">
-          <span className="wallet-address">{request.walletAddress}</span>
-          <div className="actions">
-            <button className="approve-btn" onClick={() => approveWallet(request.walletAddress)}>
-              Approve
-            </button>
-            <button className="reject-btn" onClick={() => rejectWallet(request.walletAddress)}>
-              Reject
-            </button>
-          </div>
-        </li>
-      ))
-    )}
-  </ul>
-</div>
+      <h1 className="title">Pending Wallet Approval Requests</h1>
+      <ul className="request-list">
+        {requests.length === 0 ? (
+          <p className="no-requests">No pending requests</p>
+        ) : (
+          requests.map((request) => (
+            <li key={request.walletAddress} className="request-item">
+              <span className="wallet-address">{request.walletAddress}</span>
+              <div className="actions">
+                <button 
+                  className="approve-btn" 
+                  onClick={() => approveWallet(request.walletAddress)}>
+                  Approve
+                </button>
+                <button 
+                  className="reject-btn" 
+                  onClick={() => rejectWallet(request.walletAddress)}>
+                  Reject
+                </button>
+              </div>
+            </li>
+          ))
+        )}
+      </ul>
+    </div>
   );
 };
 

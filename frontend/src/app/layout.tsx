@@ -6,7 +6,10 @@ import { Inter } from "next/font/google";
 import ContextProvider from './context';
 import Nav from "./components/Nav/Nav"; // Import the Footer component
 import Footer from "./components/Footer/Footer";
-import Chat from "./components/Chat/Chat";
+
+import { http } from "viem";
+import { StoryProvider } from "@story-protocol/react-sdk";
+import { useWalletClient } from 'wagmi';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,22 +35,27 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   const cookies = headers().get('cookie');
-
+ 
+  
+  
   return (
     <html lang="en">
       <body className={inter.className}>
         <ContextProvider cookies={cookies}>
-          {/* Global Navigation Component */}
+     
           <Nav />
-          
-          {/* Main Content */}
+        
           <main className="pt-[100px]">{children}</main>
-
-          
-          {/* Global Footer Component */}
+        
           <Footer />
+
+
         </ContextProvider>
       </body>
     </html>
   );
 }
+
+
+
+

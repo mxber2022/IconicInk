@@ -6,6 +6,11 @@ import "./Connect.css";
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
+
+import { http } from 'viem';
+import { Account, privateKeyToAccount, Address } from 'viem/accounts';
+import { StoryClient, StoryConfig } from "@story-protocol/core-sdk";
+
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
 const owner = "0x7199D548f1B30EA083Fe668202fd5E621241CC89";
@@ -228,16 +233,22 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       /*
         Mint nft
       */
-      writeContract({ 
-        abi,
-        address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
-        functionName: 'safeMint',  // createMarket
-        args: [ 
-          "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
-          data.IpfsHash
-        ]
-      });
-  
+      // writeContract({ 
+      //   abi,
+      //   address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
+      //   functionName: 'safeMint',  // createMarket
+      //   args: [ 
+      //     "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
+      //     data.IpfsHash
+      //   ]
+      // });
+
+
+      /*
+        for story
+      */
+        
+
     } catch (error) {
       console.error("Error during the minting process:", error);
     }
@@ -282,7 +293,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                   <h3 className='rajdhani-regular'>Generated AI Image with Signature:</h3>
                 {/* Main canvas for displaying the image */}
                 <canvas id="imageCanvas" ref={canvasRef} />
-                    <h4>Draw your signature:</h4>
+                    <h4 className='font-rajdhani' >Draw your signature:</h4>
                     {/* Canvas for drawing the signature */}
                     <canvas
                       id="signatureCanvas"
