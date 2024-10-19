@@ -34,7 +34,7 @@ async function haha() {
 
     //const ipIpfsHash = await uploadJSONToIPFS(ipMetadata)
 
-    const ipIpfsHash = await fetch('/api/uploadJSONToIPFS', {
+    const response1 = await fetch('/api/uploadJSONToIPFS', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,15 +42,24 @@ async function haha() {
         body: JSON.stringify({ jsondata: ipMetadata }), // Send base64-encoded blob
     });
 
+
+    const responseData = await response1.json();
+    const ipIpfsHash = responseData.IpfsHash; // Extract the IpfsHash
+    console.log("ipIpfsHash: ", ipIpfsHash);
     const ipHash = createHash('sha256').update(JSON.stringify(ipMetadata)).digest('hex')
+
    // const nftIpfsHash = await uploadJSONToIPFS(nftMetadata)
-   const nftIpfsHash = await fetch('/api/uploadJSONToIPFS', {
+   const response2 = await fetch('/api/uploadJSONToIPFS', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({ jsondata: nftMetadata }), // Send base64-encoded blob
     });
+
+    const responseDatax = await response2.json();
+    const nftIpfsHash = responseDatax.IpfsHash; // Extract the IpfsHash
+    console.log("nftIpfsHash: ", nftIpfsHash);
    
     const nftHash = createHash('sha256').update(JSON.stringify(nftMetadata)).digest('hex')
 

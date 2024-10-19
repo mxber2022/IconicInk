@@ -12,9 +12,9 @@ export async function POST(req: NextRequest) {
   
 
         const result = await pinata.pinJSONToIPFS(jsondata);
-
+        console.log("result: ", result.IpfsHash);
         // Return success response
-        return NextResponse.json(result, { status: 200 });
+        return NextResponse.json({ IpfsHash: result.IpfsHash }, { status: 200 });
     } catch (error) {
         console.error('Error uploading to JSON IPFS:', error);
         return NextResponse.json({ message: 'Error uploading JSON to IPFS', error }, { status: 500 });
