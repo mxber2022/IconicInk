@@ -46,13 +46,13 @@ function Presentation() {
             },
     
             {
-              title: "Design",
+              title: "Flow Diagram",
               content: (
                   <>
                     <h2></h2>
                     {/* <p><strong> </strong>Snap helps web2 platform like twitter, facebook etc to bring Web3 functionalities like blockchain transactions and smart contract interactions in the form of tweet(twitter) and post(facebook) </p> */}
                     <Image
-        src="/TlSNotary.png" // Local image path in the `public` folder or an external link
+        src="/flow.png" // Local image path in the `public` folder or an external link
         alt="Description of the image"
         width={1000} // Width of the image
         height={1000} // Height of the image
