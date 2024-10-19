@@ -52,11 +52,11 @@ function Presentation() {
                     <h2></h2>
                     {/* <p><strong> </strong>Snap helps web2 platform like twitter, facebook etc to bring Web3 functionalities like blockchain transactions and smart contract interactions in the form of tweet(twitter) and post(facebook) </p> */}
                     <Image
-        src="/flow.png" // Local image path in the `public` folder or an external link
-        alt="Description of the image"
-        width={1000} // Width of the image
-        height={1000} // Height of the image
-      />
+                    src="/flow.png" // Local image path in the `public` folder or an external link
+                    alt="Description of the image"
+                    width={1000} // Width of the image
+                    height={1000} // Height of the image
+                    />
                   </> 
               ),
             },
@@ -76,6 +76,19 @@ function Presentation() {
                     Your browser does not support the video tag.
                 </video> */}
                     </>
+                ),
+            },
+            {
+                title: "Features To Be Added",
+                content: (
+                    <>
+                        <h2></h2>
+                        <p><strong>Live Video Collaboration Mode: </strong>Enable vide mode</p>
+                        <p><strong>Voting System: </strong>Fans can vote on their favorite AI-generated images. </p>
+                        <p><strong>Exclusive Fan Tiers: </strong>Create tiered memberships or subscription levels, where top-tier fans get more frequent opportunities to collaborate or access special features </p>
+                        <p><strong>Customizable Fan Avatars: </strong>Allow fans to create or upload custom avatars that are visible during chats and collaborations, enhancing personalization. </p>
+                        <p><strong>Competition: </strong>AI ART Competition</p>
+                    </> 
                 ),
             },
 

@@ -2,11 +2,12 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAccount } from 'wagmi';  // Assuming you're using wagmi for wallet connect
 import io from 'socket.io-client';
-import "./Connect.css";
+import './Connect.css';
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
 
+import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
 const owner = process.env.NEXT_PUBLIC_ADMIN;
@@ -229,15 +230,15 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       /*
         Mint nft
       */
-      // writeContract({ 
-      //   abi,
-      //   address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
-      //   functionName: 'safeMint',  // createMarket
-      //   args: [ 
-      //     "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
-      //     data.IpfsHash
-      //   ]
-      // });
+      writeContract({ 
+        abi,
+        address: "0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98",
+        functionName: 'safeMint',  // createMarket
+        args: [ 
+          "0x7199D548f1B30EA083Fe668202fd5E621241CC89",
+          data.IpfsHash
+        ]
+      });
 
 
       /*
@@ -250,6 +251,9 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     }
   };
   
+  async function mintOnStory() {
+    haha()
+  }
   
   return (
     <div className="container">
@@ -259,8 +263,8 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       {isConnected ? (
         <div>
           {!isApproved && (
-        <button onClick={requestApproval} disabled={isRequestPending || !address} className='send-button font-rajdhani '>
-          Request Approval
+            <button onClick={requestApproval} disabled={isRequestPending || !address} className='send-button font-rajdhani '>
+            Request Approval
         </button>
       )}
           <textarea
@@ -302,7 +306,8 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                       onMouseUp={stopDrawing}
                     />
                     <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
-                    <button onClick={mint} className='send-button font-rajdhani'>Mint</button>
+                    <button onClick={mint} className='send-button font-rajdhani'>MintOnBase</button>
+                    <button onClick={mintOnStory} className='send-button font-rajdhani'>MintOnStory</button>
                   </>
                 )
               }
@@ -313,7 +318,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
           {!isApproved && <p className="font-rajdhani">Your wallet address is not approved for editing prompt.</p>}
         </div>
       ) : (
-        <p className="font-rajdhani">Please connect your wallet to proceed.</p>
+        <p className="font-rajdhani hehe">Please connect your wallet to proceed.</p>
       )}
     </div>
   );

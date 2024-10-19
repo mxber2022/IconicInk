@@ -52,7 +52,7 @@ const CollabRequests: React.FC = () => {
           <p>No pending requests</p>
         ) : (
           requests.map((request) => (
-            <li key={request.walletAddress}>
+            <li key={request.walletAddress} className='font-rajdhani hehe'>
               {request.walletAddress}
               <button onClick={() => approveWallet(request.walletAddress)}>
                 Approve
