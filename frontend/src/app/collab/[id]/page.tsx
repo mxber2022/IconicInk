@@ -1,5 +1,6 @@
 import Connect from "@/app/components/Connect/Connect";
 import Chat from "@/app/components/Chat/Chat";
+import CollabRequests from "@/app/components/CollabRequests/CollabRequests";
 
 interface DocumentPageProps {
   params: { id: string };
@@ -20,6 +21,9 @@ const DocumentPage = ({ params }: DocumentPageProps) => {
       <Chat />
     </div>
   </div>
+
+  {/* <CollabRequests/> */}
+
 </>
 
   )

@@ -45,26 +45,28 @@ const AdminRequestsPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Pending Wallet Approval Requests</h1>
-      <ul>
-        {requests.length === 0 ? (
-          <p>No pending requests</p>
-        ) : (
-          requests.map((request) => (
-            <li key={request.walletAddress}>
-              {request.walletAddress}
-              <button onClick={() => approveWallet(request.walletAddress)}>
-                Approve
-              </button>
-              <button onClick={() => rejectWallet(request.walletAddress)}>
-                Reject
-              </button>
-            </li>
-          ))
-        )}
-      </ul>
-    </div>
+    <div className="wallet-requests font-rajdhani">
+  <h1>Pending Wallet Approval Requests</h1>
+  <ul>
+    {requests.length === 0 ? (
+      <p className="no-requests">No pending requests</p>
+    ) : (
+      requests.map((request) => (
+        <li key={request.walletAddress} className="request-item font-rajdhani">
+          <span className="wallet-address">{request.walletAddress}</span>
+          <div className="actions">
+            <button className="approve-btn" onClick={() => approveWallet(request.walletAddress)}>
+              Approve
+            </button>
+            <button className="reject-btn" onClick={() => rejectWallet(request.walletAddress)}>
+              Reject
+            </button>
+          </div>
+        </li>
+      ))
+    )}
+  </ul>
+</div>
   );
 };
 

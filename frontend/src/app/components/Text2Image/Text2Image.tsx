@@ -73,7 +73,7 @@ const toggleSettings = () => {
 
   return (
     <div className="flex tems-center justify-center  p-2 font-rajdhani">
-      <div className="w-full max-w-2xl rounded-lg bg-white p-16 shadow-lg">
+      <div className="w-full max-w-2xl rounded-lg bg-white p-1 shadow-lg">
         {/* <h1 className="mb-6 text-center text-2xl font-bold">
           Text-to-Image Generator
         </h1> */}
