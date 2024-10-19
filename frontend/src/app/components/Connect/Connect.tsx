@@ -7,13 +7,9 @@ import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
 
-import { http } from 'viem';
-import { Account, privateKeyToAccount, Address } from 'viem/accounts';
-import { StoryClient, StoryConfig } from "@story-protocol/core-sdk";
-
 // Connect to Express.js server at localhost:4000
 const socket = io('http://localhost:4000');  
-const owner = "0x7199D548f1B30EA083Fe668202fd5E621241CC89";
+const owner = process.env.NEXT_PUBLIC_ADMIN;
 
 interface DocumentEditorProps {
   docId: string;

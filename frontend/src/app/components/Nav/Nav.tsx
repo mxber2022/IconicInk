@@ -40,7 +40,7 @@ function Nav() {
                     </div>
 */}
                     <div >
-                        <Link href="/Presentation" style={{ color: 'black', textDecoration: 'none' }}>
+                        <Link href="" style={{ color: 'black', textDecoration: 'none' }}>
                         <p className="tagline" > Where Icons and Fans Create Sign Mint </p>
 
                         </Link>
@@ -61,6 +61,7 @@ function Nav() {
                         </div>
                     )
                     }
+
 
                 </div>
                 <div className="nav__right">

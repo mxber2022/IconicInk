@@ -90,6 +90,11 @@ app.post('/api/reject-wallet', (req: Request, res: Response) => {
   }
 });
 
+app.get('/api/approved-wallets', (req: Request, res: Response) => {
+  // Convert the set to an array and send it as a JSON response
+  res.json(Array.from(approvedWallets));
+});
+
 // WebSocket connection for collaboration
 io.on('connection', (socket) => {
   console.log('A user connected');

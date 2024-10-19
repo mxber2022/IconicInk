@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import GetApprovedWallets from '@/app/components/GetApprovedWallets/GetApprovedWallets';
 
 interface WalletRequest {
   walletAddress: string;
@@ -46,6 +47,7 @@ const AdminRequestsPage: React.FC = () => {
   };
 
   return (
+    <>
     <div className="wallet-requests font-rajdhani">
       <h1 className="title">Pending Wallet Approval Requests</h1>
       <ul className="request-list">
@@ -72,6 +74,8 @@ const AdminRequestsPage: React.FC = () => {
         )}
       </ul>
     </div>
+    <GetApprovedWallets/>
+    </>
   );
 };
 
