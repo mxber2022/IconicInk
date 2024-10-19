@@ -2,11 +2,30 @@
 import "./Nav.css";
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
+import { useState, useEffect } from "react";
 
 function Nav() {
 
     const { address, isConnected } = useAccount();
 
+    const [wallets, setWallets] = useState<string[]>([]);
+
+    useEffect(() => {
+        fetch('http://localhost:4000/api/approved-wallets')
+            .then((res) => res.json())
+            .then((data: string[]) => {
+                const adminWallet = process.env.NEXT_PUBLIC_ADMIN; // Get the admin wallet from env variable
+                
+                if (adminWallet) {
+                    const filteredWallets = data.filter(wallet => wallet !== adminWallet); // Filter out admin wallet
+                    setWallets(filteredWallets); // Update state with filtered wallets
+                } else {
+                    setWallets(data); // If no admin wallet is set, use the original data
+                }
+            })
+            .catch((err) => console.error("Error fetching wallets: ", err));
+    }, []);
+    
     return(
         <nav className="nav">
             <div className="nav__container">
@@ -52,6 +71,7 @@ function Nav() {
                         </Link>
                     </div>
 
+
                     {
                     address === process.env.NEXT_PUBLIC_ADMIN && (
                         <div>
@@ -61,6 +81,12 @@ function Nav() {
                         </div>
                     )
                     }
+
+                    <div >
+                        <Link className="rajdhani-medium " href={""} style={{ color: 'black', textDecoration: 'none' }}>
+                        LUCKYFAN: {`${wallets[0]}`}
+                        </Link>
+                    </div>
 
 
                 </div>
