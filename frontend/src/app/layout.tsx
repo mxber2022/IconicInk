@@ -45,7 +45,7 @@ export default function RootLayout({
      
           <Nav />
         
-          <main className="pt-[100px]">{children}</main>
+          <main className="flex-grow  pt-[100px] bg-white ">{children}</main>
         
           <Footer />
 

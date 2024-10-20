@@ -9,7 +9,7 @@ interface WalletRequest {
 
 const AdminRequestsPage: React.FC = () => {
   const [requests, setRequests] = useState<WalletRequest[]>([]);
-
+  const [refresh, setRefresh] = useState(false);
   // Fetch pending wallet requests
   useEffect(() => {
     fetch('http://localhost:4000/api/pending-requests')
@@ -30,6 +30,8 @@ const AdminRequestsPage: React.FC = () => {
     setRequests((prevRequests) =>
       prevRequests.filter((request) => request.walletAddress !== walletAddress)
     );
+
+    setRefresh(!refresh);
   };
 
   // Reject a wallet address
@@ -74,7 +76,7 @@ const AdminRequestsPage: React.FC = () => {
         )}
       </ul>
     </div>
-    <GetApprovedWallets/>
+    <GetApprovedWallets refresh={refresh} />
     </>
   );
 };

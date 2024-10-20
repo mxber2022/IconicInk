@@ -6,7 +6,11 @@ interface WalletRequest {
   walletAddress: string;
 }
 
-const GetApprovedWallets: React.FC = () => {
+interface GetApprovedWalletsProps {
+  refresh: boolean;
+}
+
+const GetApprovedWallets: React.FC<GetApprovedWalletsProps> = ({ refresh }) => {
   const [wallets, setWallets] = useState<string[]>([]);
 
   useEffect(() => {
@@ -14,7 +18,7 @@ const GetApprovedWallets: React.FC = () => {
       .then((res) => res.json())
       .then((data) => setWallets(data))
       .catch((err) => console.error("Error fetching wallets: ", err));
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="wallet-requests">

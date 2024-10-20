@@ -94,17 +94,17 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       //alert('Your request is pending approval.');
 
       Toastify({
-        text: "Your request is sent.",
+        text: "Your request is sent",
         duration: 3000, // 3 seconds
         close: false,
         gravity: "top", // Position the toast at the top
         position: "center", // Center the toast
-        backgroundColor: "#333", // Solid dark color
+        backgroundColor: "black", // Solid dark color
         stopOnFocus: true, // Prevents the toast from closing on hover
         style: {
           border: "2px solid #000", // Black border
           borderRadius: "10px", // Optional: Rounded edges
-          fontFamily: "font-rajdhani"
+          fontFamily: "'Courier New', monospace"
         }
       }).showToast();
 
@@ -355,7 +355,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             rows={10}
             cols={50}
             disabled={!isApproved}
-            className='font-rajdhani '
+            className='font-rajdhani mt-5 bg-white'
           />
 
           <TextToImagePage prompt={content} roomId={docId} />
@@ -410,7 +410,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             </div>
           )}
           
-          {!isApproved  && (<p className="font-rajdhani hello">Your wallet address is not approved for editing prompt.</p>)}
+          {/* {!isApproved  && (<p className="font-rajdhani hello">Your wallet address is not approved for editing prompt.</p>)} */}
         </div>
       ) : (
         <p className="font-rajdhani hehe">Please connect your wallet to proceed.</p>
