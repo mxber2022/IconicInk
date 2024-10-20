@@ -24,7 +24,7 @@ function Presentation() {
                 content: (
                     <>
                         <h2></h2>
-                        <p><strong></strong> A platform where celebrities or influencers can collaborate with their fans to create AI-generated images. The process is interactive and personalized—both the celebrity and an approved fan can edit the AI prompt together, adding a creative and collaborative touch to the final result. Once the image is generated, the celebrity can digitally sign it, adding authenticity and a personal touch, and mint it as an NFT, transferring ownership to the fan. This platform merges fan engagement with creative co-creation, allowing for unique, signed digital artwork that embodies the collaboration between celebrities and their fans. </p>
+                        <p><strong></strong> A platform where celebrities or influencers can collaborate with their fans to create AI-generated art. The process is interactive and personalized—both the celebrity and an approved fan can edit the AI prompt together and chat, adding a creative and collaborative touch to the final result. Once the image is generated, the celebrity can digitally sign it, adding authenticity and mint it as an NFT and transferring ownership to the fan. This platform merges fan engagement with creative co-creation, allowing for unique, signed digital artwork that embodies the collaboration between celebrities and their fans. </p>
                     </>
                 ),
             },
@@ -33,7 +33,7 @@ function Presentation() {
                 content: (
                     <>
                         <h2></h2>
-                        <p><strong>Enhanced Fan Engagement:</strong> Fans get a deeper, more meaningful interaction with celebrities by co-creating unique art together </p>
+                        <p><strong>Enhanced Fan Engagement:</strong> Fans get a deeper, more meaningful interaction with celebrities by co-creating unique art together. </p>
                         <p><strong>Personalized and Authentic Content:</strong> The platform allows fans and celebrities to collaborate on personalized, one-of-a-kind creations. </p>
                         <p><strong>Monetization and New Revenue Streams:</strong> Celebrities can monetize their fan engagement by selling co-created NFT artwork. </p>
                         <p><strong>Innovation in AI and Creative Expression:</strong> The platform leverages AI to empower both fans and celebrities in the creative process. </p>

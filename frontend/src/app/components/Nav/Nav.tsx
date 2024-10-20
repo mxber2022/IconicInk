@@ -85,14 +85,26 @@ function Nav() {
                         </div>
                     )
                     }
+                    { owner === address && wallets[0] && (
+                        <div>
+                            <Link className="rajdhani-medium" href={""} style={{ color: 'black', textDecoration: 'none' }}>
+                                LUCKYFAN: {`${wallets[0]}`}
+                            </Link>
+                        </div>
+                    )  
+                    
+                    
+                    }
+
                     {
-                        owner === address && (<>
-                            <div >
-                        <Link className="rajdhani-medium " href={""} style={{ color: 'black', textDecoration: 'none' }}>
-                        LUCKYFAN: {`${wallets[0]}`}
-                        </Link>
-                    </div>   
-                        </>)
+                         owner != address &&(
+                            <>
+                            <Link className="rajdhani-medium " href={""} style={{ color: 'red', textDecoration: 'none' }}>
+                                FANPAGE
+                            </Link>
+                            </>
+                        )
+
                     }
 
                 </div>

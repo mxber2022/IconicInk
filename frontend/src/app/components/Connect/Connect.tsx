@@ -363,7 +363,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
           {/* Display the generated image */}
           {generatedImage && (
             <div>
-              <h3 className='rajdhani-regular'>Generated AI Image:</h3>
+              <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image:</h1>
               <img src={generatedImage} alt="Generated AI" />
 
               
@@ -372,7 +372,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
               {
                 address == owner && (
                   <>
-                  <h3 className='rajdhani-regular'>Generated AI Image with Signature:</h3>
+                  <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image with Signature:</h1>
                 {/* Main canvas for displaying the image */}
                 <canvas id="imageCanvas" ref={canvasRef} />
                     <h4 className='font-rajdhani' >Draw your signature:</h4>
