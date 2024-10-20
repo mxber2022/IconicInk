@@ -392,7 +392,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             </div>
           )}
           
-          {!isApproved && <p className="font-rajdhani">Your wallet address is not approved for editing prompt.</p>}
+          {!isApproved  && <p className="font-rajdhani">Your wallet address is not approved for editing prompt.</p>}
         </div>
       ) : (
         <p className="font-rajdhani hehe">Please connect your wallet to proceed.</p>

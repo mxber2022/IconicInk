@@ -5,13 +5,14 @@ import { useAccount } from 'wagmi';
 import { useState, useEffect } from "react";
 import { approvedWallets } from "@/app/utils/approvedWallets";
 
+const owner = process.env.NEXT_PUBLIC_ADMIN;
 function Nav() {
 
     const { address, isConnected } = useAccount();
 
     const [wallets, setWallets] = useState<string[]>([]);
     const [error, setError] = useState<string | null>(null);
-
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -84,13 +85,15 @@ function Nav() {
                         </div>
                     )
                     }
-
-                    <div >
+                    {
+                        owner === address && (<>
+                            <div >
                         <Link className="rajdhani-medium " href={""} style={{ color: 'black', textDecoration: 'none' }}>
                         LUCKYFAN: {`${wallets[0]}`}
                         </Link>
-                    </div>
-
+                    </div>   
+                        </>)
+                    }
 
                 </div>
                 <div className="nav__right">
