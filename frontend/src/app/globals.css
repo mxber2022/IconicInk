@@ -6,6 +6,7 @@
 
 
 
+
 .font-rajdhani {
   font-family: 'Rajdhani', sans-serif;
 }
@@ -47,6 +48,10 @@ body {
   font-family: 'Rajdhani', sans-serif;
 }
 
+.hello {
+  font-family: font-rajdhani !important;
+}
+
 
 /* :root {
   --background: #ffffff;
@@ -82,7 +87,7 @@ body {
 
 
 .wallet-requests {
-  max-width: 600px;
+  width: 800px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ddd;
@@ -114,6 +119,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-evenly;
 }
 
 .wallet-address {
