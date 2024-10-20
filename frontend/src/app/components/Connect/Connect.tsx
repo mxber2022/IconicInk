@@ -6,6 +6,8 @@ import './Connect.css';
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
+import Toastify from 'toastify-js';
+import "toastify-js/src/toastify.css";
 
 import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
@@ -89,7 +91,23 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     });
     const data = await res.json();
     if (data.status === 'pending') {
-      alert('Your request is pending approval.');
+      //alert('Your request is pending approval.');
+
+      Toastify({
+        text: "Your request is sent.",
+        duration: 3000, // 3 seconds
+        close: false,
+        gravity: "top", // Position the toast at the top
+        position: "center", // Center the toast
+        backgroundColor: "#333", // Solid dark color
+        stopOnFocus: true, // Prevents the toast from closing on hover
+        style: {
+          border: "2px solid #000", // Black border
+          borderRadius: "10px", // Optional: Rounded edges
+          fontFamily: "font-rajdhani"
+        }
+      }).showToast();
+
     } else if (data.status === 'approved') {
       setIsApproved(true);
     }

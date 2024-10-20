@@ -39,7 +39,10 @@ const Chat = () => {
       roomId.current = roomIDFromPath;
       console.log("roomId: ", roomId.current);
       console.log("roomIDFromPath: ", roomIDFromPath);
-      joinRoom()
+      if(isConnected){
+        joinRoom()
+      }
+      
     }
   }, []);
 

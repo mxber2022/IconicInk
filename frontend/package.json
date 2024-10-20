@@ -28,6 +28,7 @@
     "@story-protocol/react-sdk": "^1.1.0-stable",
     "@types/crypto-js": "^4.2.2",
     "@types/socket.io-client": "^3.0.0",
+    "@types/toastify-js": "^1.12.3",
     "@web3modal/wagmi": "^5.0.11",
     "crypto-js": "^4.2.0",
     "fs": "^0.0.1-security",
@@ -38,6 +39,7 @@
     "react-dom": "^18",
     "socket.io": "^4.8.0",
     "socket.io-client": "^4.8.0",
+    "toastify-js": "^1.12.0",
     "viem": "^2.8.12",
     "wagmi": "^2.12.17"
   },
