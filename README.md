@@ -7,6 +7,11 @@ IconicInk is a platform where celebrities or influencers can collaborate with th
 - **Real-Time Chat**: Celebrities and fans communicate directly during the creative process, exchanging ideas and refining the prompt.
 - **Celebrity Signatures**: Celebrity can sign the art.
 
+## Contract 
+
+Zora Sepolia - 0xAaa906c8C2720c50B69a5Ba54B44253Ea1001C98 <br/>
+Story - 0xA004Ff15DF42D71E9611A4cA1b2E078209897144
+
 ## Technology Stack
 
 ### Frontend:
