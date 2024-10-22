@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import "./Presentation.css"
+import styles from "./Presentation.module.css"
 import Image from 'next/image';
 
 function Presentation() {
@@ -112,23 +112,23 @@ function Presentation() {
         };
       return (
         <>
-        <header className="header">
-                <div className="header__container">
-                    <div className="slider">
+        <header className={styles.header}>
+                <div className={styles.header__container}>
+                    <div className={styles.slider}>
                         {slides.map((slide, index) => (
                             <div
                                 key={index}
-                                className={`slide ${index === currentSlide ? "active" : ""}`}
+                                className={`${styles.slide} ${index === currentSlide ? styles.active : ""}`}
                             >
-                                <h3>{slide.title}</h3>
-                                <div>{slide.content}</div>
+                                <h3 className={styles.h3}>{slide.title}</h3>
+                                <div className={styles.p}>{slide.content}</div>
                             </div>
                         ))}
                     </div>
-                    <button className="prev" onClick={prevSlide}>
+                    <button className={styles.prev} onClick={prevSlide}>
                         &#10094;
                     </button>
-                    <button className="next" onClick={nextSlide}>
+                    <button className={styles.next} onClick={nextSlide}>
                         &#10095;
                     </button>
                 </div>
