@@ -44,11 +44,11 @@
     color: #000;
 }
 
-wui-connect-button button {
+/* wui-connect-button button {
 
     box-shadow: 0 0 10px #2BEB7C !important;
     background-color: #2BEB7C !important;
-}
+} */
 
 
 @media (max-width: 500px) {

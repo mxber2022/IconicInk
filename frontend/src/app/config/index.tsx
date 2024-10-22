@@ -8,7 +8,7 @@ if (!projectId) {
   throw new Error('Project ID is not defined')
 }
 
-export const networks = [ zoraSepolia, storyTestnet, baseSepolia]
+export const networks = [ mainnet]
 
 export const wagmiAdapter = new WagmiAdapter({
   storage: createStorage({

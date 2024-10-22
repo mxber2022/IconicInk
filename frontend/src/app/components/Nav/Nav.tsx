@@ -1,5 +1,5 @@
 "use client"
-import "./Nav.css";
+import styles from "./Nav.module.css";
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import { useState, useEffect } from "react";
@@ -31,12 +31,12 @@ function Nav() {
     }
 
     return(
-        <nav className="nav">
-            <div className="nav__container">
-                <div className="nav__left">
+        <nav className={styles.nav}>
+            <div className={styles.nav__container}>
+                <div className={styles.nav__left}>
                     <div>
                         <Link href="/" style={{ color: 'black', textDecoration: 'none' } }>
-                            <div className="nav__logo ">
+                            <div className={styles.nav__logo}>
                                 IconicInk
                                 
                             </div>
@@ -64,13 +64,13 @@ function Nav() {
 */}
                     <div >
                         <Link href="" style={{ color: 'black', textDecoration: 'none' }}>
-                        <p className="tagline" > Where Icons and Fans Create Sign Mint </p>
+                        <p className={styles.tagline} > Where Icons and Fans Create Sign Mint </p>
 
                         </Link>
                     </div> 
 
                     <div >
-                        <Link className="rajdhani-medium " href="/collab/mx" style={{ color: 'black', textDecoration: 'none' }}>
+                        <Link className={"rajdhani-medium"} href="/collab/mx" style={{ color: 'black', textDecoration: 'none' }}>
                         COLLAB
                         </Link>
                     </div>
@@ -106,8 +106,8 @@ function Nav() {
                     }
 
                 </div>
-                <div className="nav__right">
-                <w3m-button />
+                <div className={styles.nav__right}>
+                    <w3m-button />
                 </div>
             </div>
         </nav>

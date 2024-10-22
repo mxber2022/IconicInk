@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import GetApprovedWallets from '@/app/components/GetApprovedWallets/GetApprovedWallets';
+import styles from "./page.module.css"
 
 interface WalletRequest {
   walletAddress: string;
@@ -50,23 +51,23 @@ const AdminRequestsPage: React.FC = () => {
 
   return (
     <>
-    <div className="wallet-requests font-rajdhani">
-      <h1 className="title">Pending Wallet Approval Requests</h1>
-      <ul className="request-list">
+    <div className={`${styles['wallet-requests']} font-rajdhani`}>
+      <h1 className={styles.title}>Pending Wallet Approval Requests</h1>
+      <ul className={styles['request-list']}>
         {requests.length === 0 ? (
-          <p className="no-requests">No pending requests</p>
+          <p className={styles['no-requests']}>No pending requests</p>
         ) : (
           requests.map((request) => (
-            <li key={request.walletAddress} className="request-item">
-              <span className="wallet-address">{request.walletAddress}</span>
-              <div className="actions">
+            <li key={request.walletAddress} className={styles['request-item']}   >
+              <span className= {styles['wallet-address']} >{request.walletAddress}</span>
+              <div className={styles.actions} >
                 <button 
-                  className="approve-btn" 
+                  className={styles['approve-btn']} 
                   onClick={() => approveWallet(request.walletAddress)}>
                   Approve
                 </button>
                 <button 
-                  className="reject-btn" 
+                  className={styles['reject-btn']}
                   onClick={() => rejectWallet(request.walletAddress)}>
                   Reject
                 </button>
