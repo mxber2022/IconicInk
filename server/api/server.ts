@@ -101,6 +101,15 @@ app.get('/api/approved-wallets', (req: Request, res: Response) => {
   res.json(Array.from(approvedWallets));
 });
 
+app.post('/api/clear-wallets', (req: Request, res: Response) => {
+  // Clear the walletRequests array and approvedWallets set
+  walletRequests.length = 0; // Empty the array
+  approvedWallets.clear();   // Clear the set
+
+  res.json({ message: 'All wallet requests and approvals have been cleared.' });
+});
+
+
 // WebSocket connection for collaboration
 io.on('connection', (socket) => {
   console.log("A user connected:", socket.id);
