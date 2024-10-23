@@ -13,7 +13,11 @@ interface ChatMessage {
   timestamp: string;
 } 
 
-const socket = io(myconfig.serverUrl);
+//const socket = io(myconfig.serverUrl);
+
+const socket = io(myconfig.serverUrl, {
+  transports: ['polling', 'websocket'],
+});
 
 const Chat = () => {
   

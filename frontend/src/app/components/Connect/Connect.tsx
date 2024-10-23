@@ -13,7 +13,10 @@ import myconfig from "../../../myconfig.json"
 
 import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
-const socket = io(myconfig.serverUrl);  
+//const socket = io(myconfig.serverUrl);  
+const socket = io(myconfig.serverUrl, {
+  transports: ['polling', 'websocket'],
+});
 const owner = process.env.NEXT_PUBLIC_ADMIN;
 
 interface DocumentEditorProps {
