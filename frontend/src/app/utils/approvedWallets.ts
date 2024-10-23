@@ -1,7 +1,14 @@
 // utils/fetchWallets.ts
 export const approvedWallets = async (): Promise<string[]> => {
     try {
-        const response = await fetch('https://server-6ins05cyx-mxber2022s-projects.vercel.app/api/approved-wallets');
+        const response = await fetch('https://server-ctwa8oseb-mxber2022s-projects.vercel.app/api/approved-wallets', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          console.log("response: ", response);
         
         if (!response.ok) {
             throw new Error(`Failed to fetch wallets, status: ${response.status}`);
