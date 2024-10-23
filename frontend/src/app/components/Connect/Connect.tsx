@@ -2,12 +2,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAccount } from 'wagmi';  // Assuming you're using wagmi for wallet connect
 import io from 'socket.io-client';
-import './Connect.css';
+import styles from './Connect.module.css';
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
+import { approvedWallets } from '@/app/utils/approvedWallets'
 
 import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
@@ -31,6 +32,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
 
   const [status, setStatus] = useState<string>('MintOnStory');
   const [uri, setUri] = useState<string>('');
+
 
   useEffect(() => {
     // Fetch the initial document content when the component loads
@@ -336,16 +338,102 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
         console.error("Error during the minting process:", error);
       }
   }
+
+  const [statuss, setStatuss] = useState<string>('MintOnBase');
+  const mintonbase = async () => {
+    setStatuss("on ipfs ...");
+    const canvas = document.getElementById('imageCanvas') as HTMLCanvasElement;
+  
+    if (!canvas) {
+      console.error("Canvas not found!");
+      return;
+    }
+  
+    const context = canvas.getContext('2d');
+    if (!context) {
+      console.error("Canvas context not found.");
+      return;
+    }
+  
+    try {
+      // Convert the canvas to a Blob
+      const blob = await canvasToBlob(canvas, 'image/png');
+  
+      if (!blob) {
+        console.error("Failed to convert canvas to blob.");
+        return;
+      }
+  
+      // Convert Blob to base64
+      const base64Blob = await convertBlobToBase64(blob);
+      
+      console.log("Generated base64 blob: ", base64Blob);
+  
+      // IPFS upload logic
+      const response = await fetch('/api/uploadToIPFS', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ blob: base64Blob }), // Send base64-encoded blob
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        console.log('IPFS Upload Result:', data);
+      } else {
+        console.error('Error:', data.message);
+      }
+  
+      // Optional image display logic
+      const url = URL.createObjectURL(blob);
+      const newImg = document.createElement('img');
+      newImg.src = url;
+     // document.body.appendChild(newImg);
+  
+      newImg.onload = () => {
+        URL.revokeObjectURL(url); // Free memory
+      };
+      
+      console.log("data",data.IpfsHash)
+      /*
+        Mint nft
+      */
+      setStatuss("Minting...");
+      const walletsData = await approvedWallets();
+      console.log("walletsData:", walletsData);
+
+      writeContract({ 
+        abi,
+        address: "0x4EEc84B0f4Fb1c035013a673095b1E7e73ea63cc",
+        functionName: 'safeMint',  // createMarket
+        args: [ 
+          walletsData[0],
+          data.IpfsHash
+        ]
+      });
+      
+      await new Promise<void>((resolve) => {
+        setTimeout(resolve, 10000); // 10,000 milliseconds = 10 seconds
+      });
+
+      setStatuss("Minted");
+        
+
+    } catch (error) {
+      console.error("Error during the minting process:", error);
+    }
+  };
   
   return (
-    <div className="container">
-      <h1 className='rajdhani-medium '>PromptFusion</h1>
+    <div className={styles.container}>
+      <h2 className={`${styles.title} rajdhani-medium `}>PromptFusion</h2>
       
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
         <div>
           {!isApproved && (
-            <button onClick={requestApproval} disabled={isRequestPending || !address} className='send-button font-rajdhani '>
+            <button onClick={requestApproval} disabled={isRequestPending || !address} className={`${styles['button']} font-rajdhani`}>
             Request Approval
         </button>
       )}
@@ -355,24 +443,20 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             rows={10}
             cols={50}
             disabled={!isApproved}
-            className='font-rajdhani mt-5 bg-white'
+            className={`${styles.textarea} font-rajdhani mt-5 bg-white`}
           />
 
           <TextToImagePage prompt={content} roomId={docId} />
 
           {/* Display the generated image */}
           {generatedImage && (
-            <div>
-              <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image:</h1>
-              <img src={generatedImage} alt="Generated AI" />
-
-              
-
-              
+            <div className={styles.ai}>
+              <h1 className='rajdhani-regular' >Generated AI Image:</h1>
+              <img src={generatedImage} alt="Generated AI"/>      
               {
                 address == owner && (
                   <>
-                  <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image with Signature:</h1>
+                  <h1 className='rajdhani-regular'>Generated AI Image with Signature:</h1>
                 {/* Main canvas for displaying the image */}
                 <canvas id="imageCanvas" ref={canvasRef} />
                     <h4 className='font-rajdhani' >Draw your signature:</h4>
@@ -389,13 +473,17 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                     />
                     <div className='flex'>
                       <div className='mr-4'>
-                        <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
+                        <button onClick={addSignatureToImage} className='button font-rajdhani'>Add Signature to Image</button>
                       </div>
-                      <div className='mr-4'>
+                      {/* <div className='mr-4'>
                         <button onClick={mint} className='send-button font-rajdhani'>MintOnZora</button>
                       </div>
                       <div className='mr-4'>
                         <button onClick={mintOnStory} className='send-button font-rajdhani'>{status}</button>
+                      </div> */}
+                    
+                      <div className='mr-4'>
+                        <button onClick={mintonbase} className='button font-rajdhani'>{statuss}</button>
                       </div>
                     </div>
                     

@@ -3,7 +3,7 @@
 import { wagmiAdapter, projectId } from '../config'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react' 
-import { sepolia, zoraSepolia } from '@reown/appkit/networks'
+import { sepolia, zoraSepolia, mainnet } from '@reown/appkit/networks'
 import React, { type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
@@ -26,12 +26,12 @@ const metadata = {
 const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [zoraSepolia],
-  defaultNetwork: zoraSepolia,
+  networks: [mainnet],
+  defaultNetwork: mainnet,
   allowUnsupportedChain: true,
   metadata: metadata,
   features: {
-    analytics: true, // Optional - defaults to your Cloud configuration
+    analytics: false, // Optional - defaults to your Cloud configuration
   }
 })
 

@@ -1,6 +1,6 @@
 /* styles.css */
 
-body {
+.body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -16,13 +16,13 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.h1 {
   font-size: 24px;
   text-align: center;
   color: #333;
 }
 
-textarea {
+.textarea {
   width: 100%;
   height: 200px;
   border: 1px solid #ccc;
@@ -34,17 +34,17 @@ textarea {
   box-sizing: border-box;
 }
 
-textarea:focus {
+.textarea:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-button {
+.button {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -52,7 +52,32 @@ button {
   font-size: 15px !important;
 }
 
-button:hover {
+.button:hover {
   background-color: #0056b3;
 }
 
+
+.join-button, .send-button {
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.textheight {
+  height: 70px !important;
+}
+
+.ai {
+  padding: 9px 9px;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
