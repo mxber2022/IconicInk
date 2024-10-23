@@ -85,7 +85,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   // Handle wallet approval request
   const requestApproval = async () => {
     setIsRequestPending(true);
-    const res = await fetch('http://localhost:4000/api/request-approval', {
+    const res = await fetch(`${myconfig.serverUrl}/api/request-approval`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
