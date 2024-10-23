@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import GetApprovedWallets from '@/app/components/GetApprovedWallets/GetApprovedWallets';
 import styles from "./page.module.css"
+import myconfig from "../../../myconfig.json"
 
 interface WalletRequest {
   walletAddress: string;
@@ -13,7 +14,7 @@ const AdminRequestsPage: React.FC = () => {
   const [refresh, setRefresh] = useState(false);
   // Fetch pending wallet requests
   useEffect(() => {
-    fetch('http://localhost:4000/api/pending-requests')
+    fetch(`${myconfig.serverUrl}/api/pending-requests`)
       .then((res) => res.json())
       .then((data) => setRequests(data))
       .catch((err) => console.error("Error fetching pending requests:", err));
@@ -21,7 +22,7 @@ const AdminRequestsPage: React.FC = () => {
 
   // Approve a wallet address
   const approveWallet = async (walletAddress: string) => {
-    await fetch('http://localhost:4000/api/approve-wallet', {
+    await fetch(`${myconfig.serverUrl}/api/approve-wallet`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ walletAddress }),
@@ -37,7 +38,7 @@ const AdminRequestsPage: React.FC = () => {
 
   // Reject a wallet address
   const rejectWallet = async (walletAddress: string) => {
-    await fetch('http://localhost:4000/api/reject-wallet', {
+    await fetch(`${myconfig.serverUrl}/api/reject-wallet`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ walletAddress }),

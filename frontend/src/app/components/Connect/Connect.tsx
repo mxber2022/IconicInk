@@ -9,10 +9,11 @@ import { useWriteContract } from 'wagmi'
 import Toastify from 'toastify-js';
 import "toastify-js/src/toastify.css";
 import { approvedWallets } from '@/app/utils/approvedWallets'
+import myconfig from "../../../myconfig.json"
 
 import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
-const socket = io('http://localhost:4000');  
+const socket = io(myconfig.serverUrl);  
 const owner = process.env.NEXT_PUBLIC_ADMIN;
 
 interface DocumentEditorProps {
