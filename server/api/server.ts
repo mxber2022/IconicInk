@@ -104,7 +104,7 @@ app.get('/api/approved-wallets', (req: Request, res: Response) => {
 
 // WebSocket connection for collaboration
 io.on('connection', (socket) => {
-  console.log('A user connected');
+  console.log("A user connected:", socket.id);
 
   socket.on('join-room', (roomId, walletAddress) => {
     socket.join(roomId);
