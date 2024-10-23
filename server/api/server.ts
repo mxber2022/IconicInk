@@ -25,10 +25,10 @@ app.use(cors({
 // CORS configuration for Socket.IO
 const io = new SocketIOServer(server, {
   cors: {
-    origin: 'https://iconic-ink.vercel.app',
+    origin: "*",
     methods: ['GET', 'POST'],
     credentials: false,
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   }
 });
 
