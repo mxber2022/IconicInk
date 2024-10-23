@@ -8,26 +8,27 @@ const server = http.createServer(app);
 app.use(express.json());
 
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow access from any origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+app.options('*', (req: Request, res: Response) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);  // Respond with 200 OK for preflight
 });
 
 // CORS middleware for Express
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from Next.js frontend
-  methods: ['GET', 'POST'],
-  credentials: true, // Enable cookies or credentials if necessary
+  origin: '*',  // Allow all origins, or specify your frontend URL like 'http://localhost:3000'
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false  // Set to true if credentials (like cookies) are required
 }));
 
 // CORS configuration for Socket.IO
 const io = new SocketIOServer(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://iconic-ink.vercel.app',
     methods: ['GET', 'POST'],
-    credentials: true,
+    credentials: false,
   }
 });
 
