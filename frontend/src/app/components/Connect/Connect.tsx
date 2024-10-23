@@ -36,6 +36,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
 
   const [status, setStatus] = useState<string>('MintOnStory');
   const [uri, setUri] = useState<string>('');
+  const [walletGotApproved, setWallerGotApproved] = useState<string>('');
 
 
   useEffect(() => {
@@ -60,6 +61,12 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       console.log("status: ", status);
     });
 
+    socket.on('wallet__approved', (data: any) => {
+     // setIsApproved(status === 'approved');
+      setWallerGotApproved(data.walletAddress)
+      console.log("status data : ", data);
+    });
+
     socket.on('ai-image-generated', (imageUrl) => {
       setGeneratedImage(imageUrl); // Set the generated image URL
     });
@@ -74,7 +81,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
 
   // Handle content editing
   const handleEdit = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (!isApproved) {
+    if (!isApproved && walletGotApproved !== address) {
       alert('You are not approved to edit this document.');
       return;
     }
@@ -437,7 +444,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
         <div>
-          {!isApproved && (
+          {(!isApproved && walletGotApproved !== address) && (
             <button onClick={requestApproval} disabled={isRequestPending || !address} className={`${styles['button']} font-rajdhani`}>
             Request Approval
         </button>
@@ -447,7 +454,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             onChange={handleEdit}
             rows={10}
             cols={50}
-            disabled={!isApproved}
+            disabled={!isApproved && walletGotApproved !== address}
             className={`${styles.textarea} font-rajdhani mt-5 bg-white`}
           />
 
