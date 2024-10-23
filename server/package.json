@@ -15,6 +15,7 @@
     "typescript": "^5.6.3"
   },
   "scripts": {
-    "dev": "ts-node server.ts"
+    "dev": "ts-node server.ts",
+    "build": "tsc"
   }
 }
