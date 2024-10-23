@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useAccount } from 'wagmi';  // Assuming you're using wagmi for wallet connect
 import io from 'socket.io-client';
-import './Connect.css';
+import styles from './Connect.module.css';
 import TextToImagePage from '../Text2Image/Text2Image';
 import {abi} from "./abi"
 import { useWriteContract } from 'wagmi'
@@ -426,14 +426,14 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   };
   
   return (
-    <div className="container">
-      <h1 className='rajdhani-medium '>PromptFusion</h1>
+    <div className={styles.container}>
+      <h1 className='rajdhani-medium'>PromptFusion</h1>
       
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
         <div>
           {!isApproved && (
-            <button onClick={requestApproval} disabled={isRequestPending || !address} className='send-button font-rajdhani '>
+            <button onClick={requestApproval} disabled={isRequestPending || !address} className={`${styles['button']} font-rajdhani`}>
             Request Approval
         </button>
       )}
@@ -443,7 +443,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
             rows={10}
             cols={50}
             disabled={!isApproved}
-            className='font-rajdhani mt-5 bg-white'
+            className={`${styles.textarea} font-rajdhani mt-5 bg-white`}
           />
 
           <TextToImagePage prompt={content} roomId={docId} />
@@ -477,7 +477,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                     />
                     <div className='flex'>
                       <div className='mr-4'>
-                        <button onClick={addSignatureToImage} className='send-button font-rajdhani'>Add Signature to Image</button>
+                        <button onClick={addSignatureToImage} className='button font-rajdhani'>Add Signature to Image</button>
                       </div>
                       {/* <div className='mr-4'>
                         <button onClick={mint} className='send-button font-rajdhani'>MintOnZora</button>
@@ -487,7 +487,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
                       </div> */}
                     
                       <div className='mr-4'>
-                        <button onClick={mintonbase} className='send-button font-rajdhani'>{statuss}</button>
+                        <button onClick={mintonbase} className='button font-rajdhani'>{statuss}</button>
                       </div>
                     </div>
                     

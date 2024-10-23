@@ -108,7 +108,7 @@ const Chat = () => {
         </div>
 
         <div className="btnsend">
-            <button className="send-button font-rajdhani font-medium" onClick={sendMessage}>
+            <button className="button font-rajdhani font-medium" onClick={sendMessage}>
             Send
             </button>
         </div>

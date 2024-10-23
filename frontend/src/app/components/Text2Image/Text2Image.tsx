@@ -6,6 +6,7 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { textToImage } from "@/app/action";
 import io from 'socket.io-client';
+import styles from "./Text2Image.module.css";
 
 const socket = io('http://localhost:4000');
 
@@ -83,7 +84,7 @@ const toggleSettings = () => {
 
 
           <button
-            className="mt-4 w-full flex justify-center bg-black font-rajdhani send-button"
+            className={`${styles.button} mt-4 w-full flex justify-center bg-black font-rajdhani `}
             onClick={toggleSettings}
             >
             {showSettings ? "Hide Settings" : "Show Settings"}
@@ -100,15 +101,15 @@ const toggleSettings = () => {
   
 
             {showSettings && (<>
-              <Form.Field name="modelId">
-                <Form.Label className="block text-sm font-medium text-gray-700">
+              <Form.Field name={styles.modelId}>
+                <Form.Label className="block text-sm font-medium text-gray-700 ">
                   Model ID
                 </Form.Label>
-                <Select.Root 
+                <Select.Root
                   value={formState.modelId}
                   onValueChange={(value: any) => handleSelectChange("modelId", value)}
                 >
-                  <Select.Trigger className="mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
+                  <Select.Trigger className="text-white mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
                     <Select.Value />
                     <Select.Icon>
                       <ChevronDownIcon />
@@ -116,7 +117,7 @@ const toggleSettings = () => {
                   </Select.Trigger>
                   <Select.Portal>
                     <Select.Content className="overflow-hidden rounded-md bg-white shadow-lg">
-                      <Select.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white text-gray-700">
+                      <Select.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center  bg-white text-gray-700">
                         <ChevronUpIcon />
                       </Select.ScrollUpButton>
                       <Select.Viewport className="p-1">
@@ -150,7 +151,7 @@ const toggleSettings = () => {
                     value={formState.height}
                     onValueChange={(value:any) => handleSelectChange("height", value)}
                   >
-                    <Select.Trigger className="mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
+                    <Select.Trigger className=" text-white mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
                       <Select.Value />
                       <Select.Icon>
                         <ChevronDownIcon />
@@ -185,7 +186,7 @@ const toggleSettings = () => {
                     value={formState.width}
                     onValueChange={(value: any) => handleSelectChange("width", value)}
                   >
-                    <Select.Trigger className="mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
+                    <Select.Trigger className="text-white mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
                       <Select.Value />
                       <Select.Icon>
                         <ChevronDownIcon />
@@ -248,7 +249,7 @@ const toggleSettings = () => {
                     handleSelectChange("safetyCheck", value)
                   }
                 >
-                  <Select.Trigger className="mt-1 flex w-full items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
+                  <Select.Trigger className="mt-1 flex w-full text-white items-center justify-between rounded-md border border-gray-300 bg-black px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500">
                     <Select.Value />
                     <Select.Icon>
                       <ChevronDownIcon />
@@ -326,7 +327,7 @@ const toggleSettings = () => {
             </>)}
             <Form.Submit asChild>
               <button
-                className="send-button flex w-full justify-center"
+                className={`${styles.button} flex w-full justify-center`}
                 disabled={isPending}
               >
                 {isPending ? "Generating..." : "Generate Images"}
