@@ -1,7 +1,7 @@
 // utils/fetchWallets.ts
 export const approvedWallets = async (): Promise<string[]> => {
     try {
-        const response = await fetch('https://server-r7reyeovf-mxber2022s-projects.vercel.app/api/approved-wallets', {
+        const response = await fetch('https://server-7kupuhzlp-mxber2022s-projects.vercel.app/api/approved-wallets', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
