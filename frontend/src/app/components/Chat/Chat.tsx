@@ -5,14 +5,15 @@ import io from "socket.io-client";
 import styles from "./Chat.module.css"
 import { useAccount } from 'wagmi';  
 import { usePathname } from 'next/navigation'
+import myconfig from "../../../myconfig.json"
 
 interface ChatMessage {
   address: string;
   message: string;
   timestamp: string;
-}
+} 
 
-const socket = io("http://localhost:4000");
+const socket = io(myconfig.serverUrl);
 
 const Chat = () => {
   
