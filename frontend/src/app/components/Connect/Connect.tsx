@@ -57,6 +57,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
     // Listen for wallet approval status
     socket.on('wallet-status', (status) => {
       setIsApproved(status === 'approved');
+      console.log("status: ", status);
     });
 
     socket.on('ai-image-generated', (imageUrl) => {
