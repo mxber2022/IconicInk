@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
-import "./Chat.css"
+import styles from "./Chat.module.css"
 import { useAccount } from 'wagmi';  
 import { usePathname } from 'next/navigation'
 
@@ -81,12 +81,12 @@ const Chat = () => {
   };
 
   return (
-    <div className="chat-container">
-      <h2 className="chat-title rajdhani-medium">Chat</h2>
+    <div className={styles.chat_container}>
+      <h2 className={`${styles.chat_title} rajdhani-medium`}>Chat</h2>
       
-      <div className="chat-box">
+      <div className={styles.chat_box}>
         {messages.map((msg, index) => (
-            <div key={index} className="chat-message">
+            <div key={index} className={`${styles.chat_message}`}>
             <strong className="font-rajdhani">
                 {msg.address.slice(0, 4)}....{msg.address.slice(-4)}
             </strong>
@@ -96,11 +96,11 @@ const Chat = () => {
         ))}
         </div>
 
-      <div className="message-input-container flex justify-center">
+      <div className={`${styles.message_input_container} flex justify-center`}>
         <div>
             <input
             type="text"
-            className="input-field font-rajdhani font-medium"
+            className={`${styles.input_field} font-rajdhani font-medium`}
             placeholder="Type your message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}

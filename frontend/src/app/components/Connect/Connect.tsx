@@ -427,7 +427,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
   
   return (
     <div className={styles.container}>
-      <h1 className='rajdhani-medium'>PromptFusion</h1>
+      <h2 className={`${styles.title} rajdhani-medium `}>PromptFusion</h2>
       
       {/* Only show the editor if the user is connected to their wallet */}
       {isConnected ? (
@@ -450,17 +450,13 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
 
           {/* Display the generated image */}
           {generatedImage && (
-            <div>
-              <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image:</h1>
-              <img src={generatedImage} alt="Generated AI" />
-
-              
-
-              
+            <div className={styles.ai}>
+              <h1 className='rajdhani-regular' >Generated AI Image:</h1>
+              <img src={generatedImage} alt="Generated AI"/>      
               {
                 address == owner && (
                   <>
-                  <h1 className='rajdhani-regular' style={{ fontFamily: 'rajdhani-regular' }}>Generated AI Image with Signature:</h1>
+                  <h1 className='rajdhani-regular'>Generated AI Image with Signature:</h1>
                 {/* Main canvas for displaying the image */}
                 <canvas id="imageCanvas" ref={canvasRef} />
                     <h4 className='font-rajdhani' >Draw your signature:</h4>

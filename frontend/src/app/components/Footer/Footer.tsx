@@ -1,5 +1,5 @@
 "use client"
-import "./Footer.css";
+import styles from "./Footer.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faXTwitter, 
@@ -14,12 +14,12 @@ import { faGlobe as faGlobeSolid } from '@fortawesome/free-solid-svg-icons';
 
 function Footer() {
     return(
-        <footer className="footer">
-            <div className="footer__container">
-                <div className="footer__copyright">
+        <footer className={styles.footer}>
+            <div className={styles.footer__container}>
+                <div className={styles.footer__copyright}>
                     © Copyright 2024
                 </div>
-                <div className="footer__links">
+                <div className={styles.footer__links}>
                     <a href="https://iconicink.com/" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faGlobeSolid} /> Website
                     </a>

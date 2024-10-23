@@ -71,3 +71,13 @@
   height: 70px !important;
 }
 
+.ai {
+  padding: 9px 9px;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
