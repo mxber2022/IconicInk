@@ -28,6 +28,7 @@ const io = new SocketIOServer(server, {
     origin: 'https://iconic-ink.vercel.app',
     methods: ['GET', 'POST'],
     credentials: false,
+    allowedHeaders: ['Content-Type'],
   }
 });
 

@@ -7,7 +7,7 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true
     },
-    "include": ["server.ts"],
+    "include": ["api/server.ts"],
     "exclude": ["node_modules"]
   }
   
