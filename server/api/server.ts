@@ -27,7 +27,7 @@ const io = new SocketIOServer(server, {
   cors: {
     origin: "*",
     methods: ['GET', 'POST'],
-    credentials: false,
+    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
   }
 });
