@@ -1,5 +1,6 @@
 'use client';
 
+import "./GetApprovedWallets.css"
 import { useState, useEffect } from 'react';
 
 interface WalletRequest {

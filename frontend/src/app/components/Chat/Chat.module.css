@@ -1,6 +1,6 @@
 
 
-    .chat-container {
+    .chat_container {
       max-width: 600px;
       margin: 0 auto;
       background-color: #fff;
@@ -10,7 +10,7 @@
       height: 530px;
     }
 
-    .chat-title {
+    .chat_title {
       text-align: center;
       font-size: 1.5rem;
       color: #333;
@@ -34,7 +34,7 @@
 
      
 
-    .chat-box {
+    .chat_box {
       height: 300px;
       overflow-y: auto;
       border-radius: 10px;
@@ -43,27 +43,27 @@
       background-color: #fff;
       margin-bottom: 20px;
     }
-    .chat-message {
+    .chat_message {
       margin-bottom: 15px;
       background-color: #f1f1f1;
       
       border-radius: 5px;
     }
-    .chat-message strong {
+    .chat_message strong {
       color: #007bff;
     }
-    .chat-message small {
+    .chat_message small {
       color: #999;
       font-size: 12px;
       margin-left: 10px;
     }
-    .message-input-container{
+    .message_input_container{
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
     }
    
-    .input-field {
+    .input_field {
         padding: 10px;
         border-radius: 5px;
         border: 1px solid #ddd;
@@ -72,6 +72,6 @@
         margin-right: 10px;
         width: 450px;
       }
-      .input-field::placeholder {
+      .input_field::placeholder {
         color: #bbb;
       }
