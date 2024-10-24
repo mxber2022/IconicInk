@@ -16,7 +16,7 @@ import haha from "../storyUtils/metadataExample"
 //const socket = io(myconfig.serverUrl);  
 const socket = io(myconfig.serverUrl, {
   transports: ['polling', 'websocket'],
-});
+}); 
 const owner = process.env.NEXT_PUBLIC_ADMIN;
 
 interface DocumentEditorProps {
@@ -352,7 +352,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
       }
   }
 
-  const [statuss, setStatuss] = useState<string>('MintOnBase');
+  const [statuss, setStatuss] = useState<string>('Mint');
   const mintonbase = async () => {
     setStatuss("on ipfs ...");
     const canvas = document.getElementById('imageCanvas') as HTMLCanvasElement;
