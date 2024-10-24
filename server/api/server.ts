@@ -25,8 +25,9 @@ app.use(cors({
 // CORS configuration for Socket.IO
 const io = new SocketIOServer(server, {
   cors: {
-    origin: ["*", "https://iconicink.onrender.com"],
+    origin: ["https://iconicink.onrender.com"],
     methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   }
 });
