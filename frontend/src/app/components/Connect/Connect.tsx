@@ -69,6 +69,7 @@ const Connect: React.FC<DocumentEditorProps> = ({ docId }) => {
 
     socket.on('ai-image-generated', (imageUrl) => {
       setGeneratedImage(imageUrl); // Set the generated image URL
+      console.log("imageUrl: ", imageUrl )
     });
 
     return () => {
