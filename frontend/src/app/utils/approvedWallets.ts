@@ -2,6 +2,8 @@
 import myconfig from '../../myconfig.json'
 
 export const approvedWallets = async (): Promise<string[]> => {
+
+    console.log("i am from approved wallets component", `${myconfig.serverUrl}/api/approved-wallets`);
     try {
         const response = await fetch(`${myconfig.serverUrl}/api/approved-wallets`, {
             method: 'GET',
