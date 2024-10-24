@@ -25,8 +25,9 @@ app.use(cors({
 // CORS configuration for Socket.IO
 const io = new SocketIOServer(server, {
   cors: {
-    origin: "https://iconic-ink.vercel.app",
+    origin: ["*", "https://iconicink.onrender.com"],
     methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   }
 });
@@ -76,6 +77,10 @@ app.post('/api/approve-wallet', (req: Request, res: Response) => {
   if (walletRequest) {
     walletRequest.status = 'approved';
     approvedWallets.add(walletAddress); // Add to approved list
+
+    // emit event about wallet accepted and update in frontend
+    io.emit('wallet__approved', { walletAddress });
+
     res.json({ status: 'approved' });
   } else {
     res.status(404).json({ error: 'Wallet request not found' });
