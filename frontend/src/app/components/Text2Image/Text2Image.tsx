@@ -7,8 +7,9 @@ import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import { textToImage } from "@/app/action";
 import io from 'socket.io-client';
 import styles from "./Text2Image.module.css";
+import myconfig from "../../../myconfig.json"
 
-const socket = io('http://localhost:4000');
+const socket = io(myconfig.serverUrl);
 
 const modelIds = [
   "ByteDance/SDXL-Lightning",

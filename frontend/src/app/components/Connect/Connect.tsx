@@ -14,11 +14,14 @@ import myconfig from "../../../myconfig.json"
 import haha from "../storyUtils/metadataExample"
 // Connect to Express.js server at localhost:4000
 //const socket = io(myconfig.serverUrl);  
-const socket = io("https://iconicink.onrender.com", {
+
+console.log("heelo",myconfig.serverUrl);
+console.log("xxxx");
+const socket = io(myconfig.serverUrl, {
   transports: ['polling', 'websocket'],
 }); 
 const owner = process.env.NEXT_PUBLIC_ADMIN;
-
+console.log("owner: ", owner);
 interface DocumentEditorProps {
   docId: string;
 }
